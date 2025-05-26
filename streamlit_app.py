@@ -74,7 +74,7 @@ elif selected_feature == "Learning Schedule Generator":
         if sam and days:
             with st.spinner(f"Creating a {days}-week learning schedule for {sam}..."):
                 bata = f"I want to learn {sam} in {days} weeks. Make a schedule for it with some study materials."
-                userdata = {'gemma': 'AIzaSyCtkHjX1sXhvEQ5_6ySoWqCHIO2xMdEsak'}  # Replace with actual API key
+                userdata = {'gemma': 'AIzaSyBhj03oRSR4vCEmEa0W76rql0b0xkMWgjI'}  # Google AI studio API key
                 api_key = userdata.get('gemma')
                 genai.configure(api_key=api_key)
                 model = genai.GenerativeModel(model_name="gemini-1.5-flash")
