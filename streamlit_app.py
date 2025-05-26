@@ -13,11 +13,11 @@ st.sidebar.success("Select a feature above to get started!")
 # Sidebar for navigation between different sections
 with st.sidebar:
     st.header("Navigation")
-    options = ["Roadmap Generator", "Image Content Extraction", "Text Query", "Learning Schedule Generator", "AI Tutor", "Progress Tracker"]
+    options = ["Roadmap Generator", "Text Query", "Learning Schedule Generator", "AI Tutor", "Progress Tracker"]
     selected_feature = st.radio("Choose a feature:", options)
 
 # Initialize Groq and Google API clients
-groq_api_key = "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"  # Replace with your actual API key
+groq_api_key = "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"  # API key
 groq_client = Groq(api_key=groq_api_key)
 
 def llama_model(prompt):
@@ -45,47 +45,6 @@ if selected_feature == "Roadmap Generator":
         else:
             st.error("Please enter a topic to generate a roadmap.")
 
-# 2. Image Content Extraction
-elif selected_feature == "Image Content Extraction":
-    st.header("🖼️ Image Content Extraction")
-    st.write("Upload an image and choose the task (get short notes, explanation, or ask a custom question).")
-
-    # Choose the task for the image
-    data_photo = st.radio(
-        "What do you want to do with this image?",
-        ('shortnotes', 'explanation', 'Provide a custom question')
-    )
-    
-    # If custom question is selected, show the input field
-    custom_question = None
-    if data_photo == "Provide a custom question":
-        custom_question = st.text_input("Enter your custom question:", placeholder="e.g., What does this image represent?")
-
-    # Image uploader
-    photo = st.file_uploader("Upload an image:", type=["png", "jpg", "jpeg"])
-
-    if photo:
-        img = PIL.Image.open(photo)
-        st.image(img, caption="Uploaded Image", use_column_width=True)
-
-        # Generate content button
-        if st.button("Generate Content"):
-            # If a custom question is provided, use that, otherwise fall back to selected task (shortnotes or explanation)
-            prompt = custom_question if custom_question else f"Provide {data_photo} for this image."
-            
-            with st.spinner("Generating content..."):
-                try:
-                    userdata = {'gemma': 'AIzaSyCtkHjX1sXhvEQ5_6ySoWqCHIO2xMdEsak'}  # Replace with actual API key
-                    api_key = userdata.get('gemma')
-                    genai.configure(api_key=api_key)
-                    model = genai.GenerativeModel(model_name="gemini-1.5-flash")
-                    
-                    # Here you can modify the prompt based on the task or question
-                    response = model.generate_content([prompt, img])
-                    st.success("Content generated!")
-                    st.write(response.text)
-                except Exception as e:
-                    st.error(f"Error occurred: {e}")
 
 # 3. Text Query
 elif selected_feature == "Text Query":
