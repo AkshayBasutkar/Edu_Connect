@@ -17,7 +17,7 @@ with st.sidebar:
     selected_feature = st.radio("Choose a feature:", options)
 
 # Initialize Groq and Google API clients
-groq_api_key = "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"  # API key
+groq_api_key = "gsk_WWp8ANRdtJh4NeTBxSeeWGdyb3FYSbblUZdOXXnFtI95X"  # API key
 groq_client = Groq(api_key=groq_api_key)
 
 def llama_model(prompt):
@@ -46,7 +46,7 @@ if selected_feature == "Roadmap Generator":
             st.error("Please enter a topic to generate a roadmap.")
 
 
-# 3. Text Query
+# 2. Text Query
 elif selected_feature == "Text Query":
     st.header("💬 Ask a Question")
     st.write("Type a question you'd like to ask, and get an AI-generated response!")
